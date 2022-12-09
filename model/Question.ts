@@ -1,11 +1,12 @@
-export class QuestionModel {
+import ResponseModel from "./Response"
+
+export default class QuestionModel {
     #id: number
     #statement: string
-    #responses: any[]
+    #responses: ResponseModel[]
     #hit: boolean
-    // #answered: boolean
 
-    constructor(id: number, statement: string, responses: any[], hit: boolean) {
+    constructor(id: number, statement: string, responses: ResponseModel[], hit: boolean) {
         this.#id = id
         this.#statement = statement
         this.#responses = responses
@@ -25,6 +26,9 @@ export class QuestionModel {
         return this.#hit
     }
     get answered(){
+        for(let response of this.#responses){
+            if(response.revealed) return true
+        }
         return false
     }
 }   
