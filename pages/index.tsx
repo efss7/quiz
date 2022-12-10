@@ -5,13 +5,20 @@ import ResponseModel from '../model/Response'
 
 
 export default function Home() {
-  const questionTest = new QuestionModel(1, 'Melhor cor?', [
+  const questionTest = new QuestionModel(1, "Melhor cor?", [
     ResponseModel.incorrect("Azul"),
     ResponseModel.incorrect("Verde"),
     ResponseModel.incorrect("Vermelho"),
     ResponseModel.correct("Rosa"),
-  ])
+  ], false)
   return (
-    <Question value={questionTest} />
+    <div style={{
+      display: 'flex',
+      height: '100vh',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }} >
+      <Question value={questionTest} />
+    </div>
   )
 }
