@@ -38,12 +38,23 @@ export default class QuestionModel {
         return new QuestionModel(this.#id, this.#statement, responsesShufflers, this.#hit)
     }
 
+    replyWith(index:number): QuestionModel{
+        const hit = this.#responses[index]?.correct
+        const responses = this.#responses.map((response, i )=>{
+            const responseSelected = index === i
+            const mustReveal = responseSelected || response.correct
+            return mustReveal ? response.reveal() : response
+        })
+        return new QuestionModel(this.id, this.statement, responses, hit )
+    }
+
     toObject() {
         return {
             id: this.#id,
             statement: this.#statement,
+            answered: this.answered,
+            hit: this.#hit,
             responses: this.#responses.map(res => res.toObject()),
-            hit: this.#hit
         }
     }
 }   
