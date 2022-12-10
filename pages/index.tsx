@@ -1,16 +1,23 @@
 
+import { useState } from 'react'
 import Question from '../components/Question'
 import QuestionModel from '../model/Question'
 import ResponseModel from '../model/Response'
 
+const questionMock = new QuestionModel(1, "Melhor cor?", [
+  ResponseModel.incorrect("Azul"),
+  ResponseModel.incorrect("Verde"),
+  ResponseModel.incorrect("Vermelho"),
+  ResponseModel.correct("Rosa"),
+])
 
 export default function Home() {
-  const questionTest = new QuestionModel(1, "Melhor cor?", [
-    ResponseModel.incorrect("Azul"),
-    ResponseModel.incorrect("Verde"),
-    ResponseModel.incorrect("Vermelho"),
-    ResponseModel.correct("Rosa"),
-  ], false)
+  const [question, setQuestion] = useState(questionMock)
+
+  function onResponse(index:number){
+    console.log(index)
+    setQuestion(question.replyWith(index))
+  }
   return (
     <div style={{
       display: 'flex',
@@ -18,7 +25,7 @@ export default function Home() {
       justifyContent: 'center',
       alignItems: 'center'
     }} >
-      <Question value={questionTest} />
+      <Question value={question} onResponse={onResponse} />
     </div>
   )
 }
