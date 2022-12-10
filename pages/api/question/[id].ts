@@ -1,17 +1,18 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import questions from '../QuestionBank'
 
-type Data = {
-    id: any
-    name: string
-}
 
 export default function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse
 ) {
-    res.status(200).json({ 
-        id: req.query.id,
-        name: 'John Doe'
-     })
+    const idSelected = +req.query.id
+    const onlyQuestionOrNothing = questions.filter(question => question.id === idSelected)
+    if(onlyQuestionOrNothing.length === 1){
+        const questionSelected = onlyQuestionOrNothing[0]
+        res.status(200).json(questionSelected.toObject())
+    }else{
+        res.status(204).send("Sem conteúdo")
+    }
+    res.status(200).json(questions[0].toObject())
 }

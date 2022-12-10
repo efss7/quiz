@@ -16,19 +16,28 @@ export default class QuestionModel {
     get id() {
         return this.#id
     }
-    get statement(){
+    get statement() {
         return this.#statement
     }
-    get responses (){
+    get responses() {
         return this.#responses
     }
-    get hit(){
+    get hit() {
         return this.#hit
     }
-    get answered(){
-        for(let response of this.#responses){
-            if(response.revealed) return true
+    get answered() {
+        for (let response of this.#responses) {
+            if (response.revealed) return true
         }
         return false
+    }
+
+    toObject() {
+        return {
+            id: this.#id,
+            statement: this.#statement,
+            responses: this.#responses.map(res => res.toObject()),
+            hit: this.#hit
+        }
     }
 }   
