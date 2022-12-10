@@ -9,7 +9,7 @@ export default function handler(
     const idSelected = +req.query.id
     const onlyQuestionOrNothing = questions.filter(question => question.id === idSelected)
     if(onlyQuestionOrNothing.length === 1){
-        const questionSelected = onlyQuestionOrNothing[0]
+        const questionSelected = onlyQuestionOrNothing[0].shuffleResponses()
         res.status(200).json(questionSelected.toObject())
     }else{
         res.status(204).send("Sem conteúdo")
