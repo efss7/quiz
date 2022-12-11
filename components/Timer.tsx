@@ -15,7 +15,7 @@ export default function Timer(props: TimerProps) {
                 isPlaying
                 onComplete={props.timesUp}
                 colors={['#BCE596', '#F7B801', '#ED827A']}
-                colorsTime={[10, 3, 0]}>
+                colorsTime={[5, 3, 0]}>
                 {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
         </div>

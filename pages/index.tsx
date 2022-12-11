@@ -1,5 +1,6 @@
 
 import { useState } from 'react'
+import Button from '../components/Button'
 import Question from '../components/Question'
 import QuestionModel from '../model/Question'
 import ResponseModel from '../model/Response'
@@ -18,7 +19,7 @@ export default function Home() {
     setQuestion(question.replyWith(index))
   }
   function timesUp() {
-    if (question.answered) {
+    if (question.noAnswered) {
       setQuestion(question.replyWith(-1))
     }
 
@@ -26,14 +27,17 @@ export default function Home() {
   return (
     <div style={{
       display: 'flex',
+      flexDirection:'column',
       height: '100vh',
       justifyContent: 'center',
       alignItems: 'center'
     }} >
       <Question
         value={question}
+        timeToAnswer={5}
         onResponse={onResponse}
         timesUp={timesUp} />
+        <Button text={"Próxima"} href={"/result"} />
     </div>
   )
 }
