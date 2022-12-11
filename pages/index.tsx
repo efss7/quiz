@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Button from '../components/Button'
 import Question from '../components/Question'
+import Quiz from '../components/Quiz'
 import QuestionModel from '../model/Question'
 import ResponseModel from '../model/Response'
 
@@ -15,15 +16,14 @@ const questionMock = new QuestionModel(1, "Melhor cor?", [
 export default function Home() {
   const [question, setQuestion] = useState(questionMock)
 
-  function onResponse(index: number) {
-    setQuestion(question.replyWith(index))
-  }
-  function timesUp() {
-    if (question.noAnswered) {
-      setQuestion(question.replyWith(-1))
-    }
+  function questionResponse(question:QuestionModel){
 
   }
+
+  function goToNextStep(){
+
+  }
+
   return (
     <div style={{
       display: 'flex',
@@ -32,12 +32,12 @@ export default function Home() {
       justifyContent: 'center',
       alignItems: 'center'
     }} >
-      <Question
-        value={question}
-        timeToAnswer={5}
-        onResponse={onResponse}
-        timesUp={timesUp} />
-        <Button text={"Próxima"} href={"/result"} />
+      <Quiz
+      question={question}
+      last={false}
+      questionResponse={questionResponse}
+      goToNextStep={goToNextStep}
+      />
     </div>
   )
 }
