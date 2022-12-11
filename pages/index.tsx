@@ -42,11 +42,8 @@ export default function Home() {
   }
 
   function idNextQuestion() {
-    if (question) {
-      const nextIndex = idsQuestions.indexOf(question.id) + 1
-      return idsQuestions[nextIndex]
-    }
-
+    const nextIndex = idsQuestions.indexOf(question.id) + 1
+    return idsQuestions[nextIndex]
   }
 
   function goToNextStep() {
@@ -61,19 +58,18 @@ export default function Home() {
   function finalize() {
     router.push({
       pathname: '/result',
-      query:{
+      query: {
         total: idsQuestions.length,
         corrects: rightAnswers
       }
     })
   }
 
-  return (
+  return question ? (
     <Quiz
       question={question}
       last={idNextQuestion() === undefined}
       questionResponse={questionResponse}
-      goToNextStep={goToNextStep}
-    />
-  )
+      goToNextStep={goToNextStep} />
+  ) : false
 }

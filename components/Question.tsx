@@ -25,7 +25,7 @@ export default function Question(props: QuestionProps) {
         return question.responses.map((response, i) => {
             return (
                 <Response
-                    key={i}
+                    key={`${question.id}-${i}`}
                     value={response}
                     index={i}
                     letter={letters[i].value}
@@ -40,6 +40,7 @@ export default function Question(props: QuestionProps) {
         <div className={styles.question} >
             <Statement text={question.statement} />
             <Timer
+                key={question.id}
                 duration={props.timeToAnswer ?? 10}
                 timesUp={props.timesUp}
             />
