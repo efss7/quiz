@@ -6,7 +6,7 @@ export default function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const idSelected = +req.query.id
+    const idSelected = +`${req.query.id}`
     const onlyQuestionOrNothing = questions.filter(question => question.id === idSelected)
     if(onlyQuestionOrNothing.length === 1){
         const questionSelected = onlyQuestionOrNothing[0].shuffleResponses()
