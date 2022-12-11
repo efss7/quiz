@@ -14,9 +14,14 @@ const questionMock = new QuestionModel(1, "Melhor cor?", [
 export default function Home() {
   const [question, setQuestion] = useState(questionMock)
 
-  function onResponse(index:number){
-    console.log(index)
+  function onResponse(index: number) {
     setQuestion(question.replyWith(index))
+  }
+  function timesUp() {
+    if (question.answered) {
+      setQuestion(question.replyWith(-1))
+    }
+
   }
   return (
     <div style={{
@@ -25,7 +30,10 @@ export default function Home() {
       justifyContent: 'center',
       alignItems: 'center'
     }} >
-      <Question value={question} onResponse={onResponse} />
+      <Question
+        value={question}
+        onResponse={onResponse}
+        timesUp={timesUp} />
     </div>
   )
 }

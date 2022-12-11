@@ -26,11 +26,16 @@ export default class QuestionModel {
     get hit() {
         return this.#hit
     }
+
     get answered() {
         for (let response of this.#responses) {
             if (response.revealed) return true
         }
         return false
+    }
+
+    get noAnswered(){
+        return !this.answered
     }
 
     shuffleResponses(): QuestionModel{
