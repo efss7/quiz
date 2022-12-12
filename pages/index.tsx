@@ -32,7 +32,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    loadingQuestion.length > 0 && loadingQuestion(idsQuestions[0])
+    idsQuestions.length > 0 && loadingQuestion(idsQuestions[0])
   }, [idsQuestions])
 
   function questionResponse(questionResponse: QuestionModel) {
@@ -42,8 +42,10 @@ export default function Home() {
   }
 
   function idNextQuestion() {
-    const nextIndex = idsQuestions.indexOf(question.id) + 1
-    return idsQuestions[nextIndex]
+    if (question?.id) {
+      const nextIndex = idsQuestions.indexOf(question.id) + 1
+      return idsQuestions[nextIndex]
+    }
   }
 
   function goToNextStep() {

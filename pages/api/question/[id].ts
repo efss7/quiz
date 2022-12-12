@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import questions from '../QuestionBank'
 
 
-export default function handler(
+export default function questionById(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -14,5 +14,4 @@ export default function handler(
     }else{
         res.status(204).send("Sem conteúdo")
     }
-    res.status(200).json(questions[0].toObject())
 }
